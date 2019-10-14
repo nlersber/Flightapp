@@ -11,6 +11,7 @@ namespace FlightApp.Models
         #region Fields
         private Product _product;
         private int _numberOfProducts;
+        private Passenger _passenger;
         #endregion
 
         #region Properties
@@ -43,6 +44,22 @@ namespace FlightApp.Models
                 _numberOfProducts = value;
             }
         }
+
+        public Passenger passenger
+        {
+            get
+            {
+                return _passenger;
+            }
+            set
+            {
+                if (value.Equals(null))
+                    throw new ArgumentException("there must be a passenger specified for the order");
+                _passenger = value;
+            }
+        }
+
+
         public double TotalPrice => Product.ProductPrice * NumberOfProductItems;
         public DateTime TimeOfOrderPlacement => DateTime.Now;
         #endregion
