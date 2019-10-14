@@ -7,9 +7,9 @@ namespace FlightApp.Models
 {
     public class Seat
     {
-
         #region Properties
         public string SeatNumber { get; set; }
+        public Passenger Passenger { get; set; }
         #endregion
     }
 }

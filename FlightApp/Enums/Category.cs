@@ -7,6 +7,6 @@ namespace FlightApp.Enums
 {
     public enum Category
     {
-        Alcohol, Sodas, WarmBeverages, Candy, Crisps //eventueel andere
+        Undefined, Alcohol, Sodas, WarmBeverages, Candy, Crisps //eventueel andere
     }
 }

@@ -7,6 +7,6 @@ namespace FlightApp.Enums
 {
     public enum EntertainmentType
     {
-        Movie, Serie, Music
+        Undefined, Movie, Serie, Music
     }
 }
