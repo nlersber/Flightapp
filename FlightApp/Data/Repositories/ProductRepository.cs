@@ -1,4 +1,5 @@
-﻿using FlightApp.Models;
+﻿using FlightApp.Enums;
+using FlightApp.Models;
 using FlightApp.Models.IRepositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -33,6 +34,11 @@ namespace FlightApp.Data.Repositories
         public IEnumerable<Product> getAll()
         {
             return _products.ToList();
+        }
+
+        public IEnumerable<Product> getByCategory(Category category)
+        {
+            return _products.Where(p=>p.ProductCategory == category).ToList();
         }
 
         public Product getById(int id)
