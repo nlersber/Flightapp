@@ -9,9 +9,9 @@ namespace FlightApp.Models.IRepositories
     {
         Product getById(int id);
         IEnumerable<Product> getAll();
-        void Add(Product line);
-        void Update(Product line);
-        void Delete(Product line);
+        void Add(Product product);
+        void Update(Product product);
+        void Delete(Product product);
         void SaveChanges();
     }
 }

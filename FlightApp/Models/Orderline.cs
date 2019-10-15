@@ -45,7 +45,7 @@ namespace FlightApp.Models
             }
         }
 
-        public Passenger passenger
+        public Passenger Passenger
         {
             get
             {
@@ -69,10 +69,11 @@ namespace FlightApp.Models
 
         }
 
-        public Orderline(Product p, int amount): this()
+        public Orderline(Product p, int amount, Passenger passenger): this()
         {
             Product = p;
             NumberOfProductItems = amount;
+            Passenger = passenger;
         }
     }
 }

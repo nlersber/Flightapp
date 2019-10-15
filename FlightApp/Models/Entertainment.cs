@@ -17,7 +17,7 @@ namespace FlightApp.Models
         #endregion
 
         #region Properties
-        public string EntertainmentId { get; set; }
+        public int EntertainmentId { get; set; }
 
         public double Duration
         {

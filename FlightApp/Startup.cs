@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FlightApp.Data;
+using FlightApp.Data.Repositories;
+using FlightApp.Models.IRepositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,9 +39,9 @@ namespace FlightApp
             services.AddOpenApiDocument(c =>
             {
                 c.DocumentName = "apidocs";
-                c.Title = "Kolveniershof API";
+                c.Title = "FlightApp API";
                 c.Version = "v1";
-                c.Description = "The Kolveniershof API documentation description.";
+                c.Description = "The FlightApp API documentation description.";
                 c.DocumentProcessors.Add(new SecurityDefinitionAppender("JWT Token", new SwaggerSecurityScheme
                 {
                     Type = SwaggerSecuritySchemeType.ApiKey,
@@ -94,14 +96,18 @@ namespace FlightApp
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            //services.AddScoped<IUserRepository, UserRepository>();
-            
+            services.AddScoped<IEntertainmentRepository, EntertainmentRepository>();
+            services.AddScoped<IOrderlineRepository, OrderlineRepository>();
+            services.AddScoped<IPassengerRepository, PassengerRepository>();
+            services.AddScoped<IPersonnelRepository, PersonnelRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
+            services.AddScoped<ApplicationDataInitializer>();
             services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDataInitializer dataInitialiser)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDataInitializer dataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -117,7 +123,7 @@ namespace FlightApp
             app.UseMvc();
             app.UseSwaggerUi3();
             app.UseSwagger();
-            //dataInitialiser.InitializeData().Wait();
+            dataInitializer.InitializeData().Wait();
         }
     }
 }

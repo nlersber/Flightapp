@@ -9,6 +9,7 @@ namespace FlightApp.Models.IRepositories
     {
         Orderline getById(int id);
         IEnumerable<Orderline> getAll();
+        IEnumerable<Orderline> getAllOrderFromSpecificCustomer(Passenger passenger);
         void Add(Orderline line);
         void Update(Orderline line);
         void Delete(Orderline line);
