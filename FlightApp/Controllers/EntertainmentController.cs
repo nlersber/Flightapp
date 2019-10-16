@@ -42,7 +42,7 @@ namespace FlightApp.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public Entertainment Get(int id)
+        public ActionResult<Entertainment> Get(int id)
         {
             return _entertainmentRepository.getById(id);
         }

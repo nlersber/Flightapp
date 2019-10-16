@@ -28,7 +28,7 @@ namespace FlightApp.Controllers
 
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<Product> Get()
+        public IEnumerable<Product> GetAll()
         {
             return _productRepository.getAll().ToList();
         }
@@ -42,34 +42,42 @@ namespace FlightApp.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public Product Get(int id)
+        public ActionResult <Product> Get(int id)
         {
             return _productRepository.getById(id);
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post(Product p)
+        public ActionResult<Product> Post(Product p)
         {
             _productRepository.Add(p);
             _productRepository.SaveChanges();
+            return CreatedAtAction(nameof(Get), p.ProductId, p);
         }
 
         // PUT api/<controller>/5
         [HttpPut("{id}")]
-        public void Put(int id, Product p)
+        public ActionResult <Product> Put(int id, Product p)
         {
+            Product product = _productRepository.getById(id);
+            if(id != product.ProductId)
+            {
+                return BadRequest();
+            }
             _productRepository.Update(p);
             _productRepository.SaveChanges();
+            return NoContent();
         }
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult <Product> Delete(int id)
         {
             Product productToRemove = _productRepository.getById(id);
             _productRepository.Delete(productToRemove);
             _productRepository.SaveChanges();
+            return productToRemove;
         }
     }
 }
